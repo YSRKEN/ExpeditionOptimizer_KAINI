@@ -5,8 +5,39 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:ExpOptII.Views"
 		mc:Ignorable="d"
-		Title="MainView" Height="300" Width="300">
-	<Grid>
-		
+		Title="遠征最適化ツール(改二)" Height="350" Width="400">
+	<Grid Margin="5,5,5,5" ShowGridLines="True">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<!-- 遠征で稼ぎたい各資材名 -->
+		<TextBlock Grid.Column="0" Grid.Row="1" Text="燃料" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Column="0" Grid.Row="2" Text="弾薬" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Column="0" Grid.Row="3" Text="鋼材" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Column="0" Grid.Row="4" Text="ボーキ" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Column="0" Grid.Row="5" Text="バケツ" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Column="0" Grid.Row="6" Text="バーナー" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Column="0" Grid.Row="7" Text="開発資材" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Column="0" Grid.Row="8" Text="家具コイン" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+		<!-- 設定項目 -->
+		<TextBlock Grid.Row="0" Grid.Column="1" Text="必要量" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Row="0" Grid.Column="2" Text="自然回復" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Row="0" Grid.Column="3" Text="消費量/日" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<!-- 実行ボタン -->
+		<Button Grid.Row="0" Grid.Column="0" Content="最適化！" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
 	</Grid>
 </Window>
