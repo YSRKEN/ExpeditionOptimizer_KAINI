@@ -5,9 +5,11 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:ExpOptII.Views"
 		mc:Ignorable="d"
-		Title="遠征最適化ツール(改二)" Height="350" Width="400">
+		Title="遠征最適化ツール(改二)" Height="450" Width="600">
 	<Grid Margin="5,5,5,5" ShowGridLines="True">
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
 			<ColumnDefinition/>
 			<ColumnDefinition/>
 			<ColumnDefinition/>
@@ -23,6 +25,9 @@
 			<RowDefinition/>
 			<RowDefinition/>
 			<RowDefinition/>
+			<RowDefinition Height="10"/>
+			<RowDefinition/>
+			<RowDefinition/>
 		</Grid.RowDefinitions>
 		<!-- 遠征で稼ぎたい各資材名 -->
 		<TextBlock Grid.Column="0" Grid.Row="1" Text="燃料" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
@@ -33,11 +38,120 @@
 		<TextBlock Grid.Column="0" Grid.Row="6" Text="バーナー" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
 		<TextBlock Grid.Column="0" Grid.Row="7" Text="開発資材" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
 		<TextBlock Grid.Column="0" Grid.Row="8" Text="家具コイン" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
-		<!-- 設定項目 -->
+		<!-- 資材量の名目 -->
 		<TextBlock Grid.Row="0" Grid.Column="1" Text="必要量" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
 		<TextBlock Grid.Row="0" Grid.Column="2" Text="自然回復" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
 		<TextBlock Grid.Row="0" Grid.Column="3" Text="消費量/日" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Row="0" Grid.Column="4" Text="生産量" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Row="0" Grid.Column="5" Text="生産量/日" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<!-- 上部入力欄 -->
+		<TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NeedFuel}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NeedAmmo}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="3" Text="{Binding NeedSteel}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="4" Text="{Binding NeedBaux}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="5" Text="{Binding NeedBucket}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="6" Text="{Binding NeedBurner}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="7" Text="{Binding NeedGear}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="8" Text="{Binding NeedCoin}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+
+		<ComboBox Grid.Column="2" Grid.Row="1" SelectedIndex="{Binding HasSupplyFuel}" Margin="1,1,1,1" FontSize="20">
+			<ComboBoxItem Content="あり"/>
+			<ComboBoxItem Content="なし"/>
+		</ComboBox>
+		<ComboBox Grid.Column="2" Grid.Row="2" SelectedIndex="{Binding HasSupplyAmmo}" Margin="1,1,1,1" FontSize="20">
+			<ComboBoxItem Content="あり"/>
+			<ComboBoxItem Content="なし"/>
+		</ComboBox>
+		<ComboBox Grid.Column="2" Grid.Row="3" SelectedIndex="{Binding HasSupplySteel}" Margin="1,1,1,1" FontSize="20">
+			<ComboBoxItem Content="あり"/>
+			<ComboBoxItem Content="なし"/>
+		</ComboBox>
+		<ComboBox Grid.Column="2" Grid.Row="4" SelectedIndex="{Binding HasSupplyBaux}" Margin="1,1,1,1" FontSize="20">
+			<ComboBoxItem Content="あり"/>
+			<ComboBoxItem Content="なし"/>
+		</ComboBox>
+		<Rectangle Grid.Column="2" Grid.Row="5" Fill="LightGray" />
+		<Rectangle Grid.Column="2" Grid.Row="6" Fill="LightGray" />
+		<Rectangle Grid.Column="2" Grid.Row="7" Fill="LightGray" />
+		<Rectangle Grid.Column="2" Grid.Row="8" Fill="LightGray" />
+
+		<TextBox Grid.Column="3" Grid.Row="1" Text="{Binding DailyConsumeFuel}" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="2" Text="{Binding DailyConsumeAmmo}" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="3" Text="{Binding DailyConsumeSteel}" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="4" Text="{Binding DailyConsumeBaux}" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="5" Text="{Binding DailyConsumeBucket}" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="6" Text="{Binding DailyConsumeBurner}" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="7" Text="{Binding DailyConsumeGear}" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="8" Text="{Binding DailyConsumeCoin}" Margin="1,1,1,1" FontSize="20"/>
+
+		<TextBox Grid.Column="4" Grid.Row="1" Text="{Binding ProductFuel}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="2" Text="{Binding ProductAmmo}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="3" Text="{Binding ProductSteel}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="4" Text="{Binding ProductBaux}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="5" Text="{Binding ProductBucket}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="6" Text="{Binding ProductBurner}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="7" Text="{Binding ProductGear}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="8" Text="{Binding ProductCoin}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+
+		<TextBox Grid.Column="5" Grid.Row="1" Text="{Binding DailyProductFuel}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="2" Text="{Binding DailyProductAmmo}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="3" Text="{Binding DailyProductSteel}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="4" Text="{Binding DailyProductBaux}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="5" Text="{Binding DailyProductBucket}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="6" Text="{Binding DailyProductBurner}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="7" Text="{Binding DailyProductGear}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="8" Text="{Binding DailyProductCoin}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<!-- 設定項目 -->
+		<TextBlock Grid.Row="10" Grid.Column="0" Text="艦隊数" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Row="10" Grid.Column="1" Text="大成功？" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Row="10" Grid.Column="2" Text="確認間隔" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Row="10" Grid.Column="3" Text="収量増加" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Row="10" Grid.Column="4" Text="解放海域" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<TextBlock Grid.Row="10" Grid.Column="5" Text="睡眠時間" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+		<!-- 下部入力欄 -->
+		<ComboBox Grid.Row="11" Grid.Column="0" SelectedIndex="{Binding FleetCountType}" Margin="1,1,1,1" FontSize="20">
+			<ComboBoxItem Content="1艦隊"/>
+			<ComboBoxItem Content="2艦隊"/>
+			<ComboBoxItem Content="3艦隊"/>
+		</ComboBox>
+		<ComboBox Grid.Row="11" Grid.Column="1" SelectedIndex="{Binding GreatSuccessType}" Margin="1,1,1,1" FontSize="20">
+			<ComboBoxItem Content="なし"/>
+			<ComboBoxItem Content="半ドラム"/>
+			<ComboBoxItem Content="全ドラム"/>
+			<ComboBoxItem Content="あり"/>
+		</ComboBox>
+		<ComboBox Grid.Row="11" Grid.Column="2" SelectedIndex="{Binding CheckIntervalType}" Margin="1,1,1,1" FontSize="20">
+			<ComboBoxItem Content="1分"/>
+			<ComboBoxItem Content="10分"/>
+			<ComboBoxItem Content="1時間"/>
+			<ComboBoxItem Content="2時間"/>
+			<ComboBoxItem Content="3時間"/>
+			<ComboBoxItem Content="8時間"/>
+			<ComboBoxItem Content="24時間"/>
+		</ComboBox>
+		<ComboBox Grid.Row="11" Grid.Column="3" SelectedIndex="{Binding SupplyBonusType}" Margin="1,1,1,1" FontSize="20">
+			<ComboBoxItem Content="0%"/>
+			<ComboBoxItem Content="5%"/>
+			<ComboBoxItem Content="10%"/>
+			<ComboBoxItem Content="15%"/>
+			<ComboBoxItem Content="20%"/>
+		</ComboBox>
+		<ComboBox Grid.Row="11" Grid.Column="4" SelectedIndex="{Binding OpenedMapType}" Margin="1,1,1,1" FontSize="20">
+			<ComboBoxItem Content="鎮守府"/>
+			<ComboBoxItem Content="南西諸島"/>
+			<ComboBoxItem Content="北方"/>
+			<ComboBoxItem Content="西方"/>
+			<ComboBoxItem Content="南方"/>
+		</ComboBox>
+		<ComboBox Grid.Row="11" Grid.Column="5" SelectedIndex="{Binding SleepingTimeType}" Margin="1,1,1,1" FontSize="20">
+			<ComboBoxItem Content="0時間"/>
+			<ComboBoxItem Content="2時間"/>
+			<ComboBoxItem Content="4時間"/>
+			<ComboBoxItem Content="6時間"/>
+			<ComboBoxItem Content="8時間"/>
+			<ComboBoxItem Content="10時間"/>
+		</ComboBox>
 		<!-- 実行ボタン -->
-		<Button Grid.Row="0" Grid.Column="0" Content="最適化！" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+		<Button Grid.Row="0" Grid.Column="0" Content="最適化！" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
 	</Grid>
 </Window>
