@@ -20,7 +20,7 @@ namespace ExpOptII.Models
 		public int NeedGear   { get => needItem[6]; set { SetProperty(ref needItem[6], value); } }
 		public int NeedCoin   { get => needItem[7]; set { SetProperty(ref needItem[7], value); } }
 		// 自然回復
-		private int[] hasSupplyItem = new int[4] {0,0,0,0};
+		private int[] hasSupplyItem = new int[4] {1,1,1,1};
 		public int HasSupplyFuel  { get => hasSupplyItem[0]; set { SetProperty(ref hasSupplyItem[0], value); } }
 		public int HasSupplyAmmo  { get => hasSupplyItem[1]; set { SetProperty(ref hasSupplyItem[1], value); } }
 		public int HasSupplySteel { get => hasSupplyItem[2]; set { SetProperty(ref hasSupplyItem[2], value); } }
@@ -57,7 +57,7 @@ namespace ExpOptII.Models
 		public double DailyProductCoin   { get => dailyProductItem[7]; set { SetProperty(ref dailyProductItem[7], value); } }
 		#endregion
 		#region 下部入力欄
-		private int[] optionItem = new int[6] {0,0,0,0,0,0};
+		private int[] optionItem = new int[6] {2,0,2,0,4,4};
 		public int FleetCountType    { get => optionItem[0]; set { SetProperty(ref optionItem[0], value); } }
 		public int GreatSuccessType  { get => optionItem[1]; set { SetProperty(ref optionItem[1], value); } }
 		public int CheckIntervalType { get => optionItem[2]; set { SetProperty(ref optionItem[2], value); } }

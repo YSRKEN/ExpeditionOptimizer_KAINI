@@ -35,23 +35,23 @@ namespace ExpOptII.ViewModels
 		[IntValidation] public ReactiveProperty<int> DailyConsumeGear { get; }
 		[IntValidation] public ReactiveProperty<int> DailyConsumeCoin { get; }
 		// 生産量
-		[IntValidation] public ReactiveProperty<int> ProductFuel { get; set; }
-		[IntValidation] public ReactiveProperty<int> ProductAmmo { get; set; }
-		[IntValidation] public ReactiveProperty<int> ProductSteel { get; set; }
-		[IntValidation] public ReactiveProperty<int> ProductBaux { get; set; }
-		[IntValidation] public ReactiveProperty<int> ProductBucket { get; set; }
-		[IntValidation] public ReactiveProperty<int> ProductBurner { get; set; }
-		[IntValidation] public ReactiveProperty<int> ProductGear { get; set; }
-		[IntValidation] public ReactiveProperty<int> ProductCoin { get; set; }
+		public ReactiveProperty<int> ProductFuel { get; set; }
+		public ReactiveProperty<int> ProductAmmo { get; set; }
+		public ReactiveProperty<int> ProductSteel { get; set; }
+		public ReactiveProperty<int> ProductBaux { get; set; }
+		public ReactiveProperty<int> ProductBucket { get; set; }
+		public ReactiveProperty<int> ProductBurner { get; set; }
+		public ReactiveProperty<int> ProductGear { get; set; }
+		public ReactiveProperty<int> ProductCoin { get; set; }
 		// 生産量/日
-		[IntValidation] public ReactiveProperty<double> DailyProductFuel { get; set; }
-		[IntValidation] public ReactiveProperty<double> DailyProductAmmo { get; set; }
-		[IntValidation] public ReactiveProperty<double> DailyProductSteel { get; set; }
-		[IntValidation] public ReactiveProperty<double> DailyProductBaux { get; set; }
-		[IntValidation] public ReactiveProperty<double> DailyProductBucket { get; set; }
-		[IntValidation] public ReactiveProperty<double> DailyProductBurner { get; set; }
-		[IntValidation] public ReactiveProperty<double> DailyProductGear { get; set; }
-		[IntValidation] public ReactiveProperty<double> DailyProductCoin { get; set; }
+		public ReactiveProperty<double> DailyProductFuel { get; set; }
+		public ReactiveProperty<double> DailyProductAmmo { get; set; }
+		public ReactiveProperty<double> DailyProductSteel { get; set; }
+		public ReactiveProperty<double> DailyProductBaux { get; set; }
+		public ReactiveProperty<double> DailyProductBucket { get; set; }
+		public ReactiveProperty<double> DailyProductBurner { get; set; }
+		public ReactiveProperty<double> DailyProductGear { get; set; }
+		public ReactiveProperty<double> DailyProductCoin { get; set; }
 		#endregion
 		#region 下部入力欄
 		public ReactiveProperty<int> FleetCountType { get; }

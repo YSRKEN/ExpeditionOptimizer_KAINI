@@ -4,9 +4,12 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-		xmlns:local="clr-namespace:ExpOptII.Views"
+		xmlns:local="clr-namespace:ExpOptII.ViewModels"
 		mc:Ignorable="d"
 		Title="遠征最適化ツール(改二)" Height="450" Width="600">
+	<Window.DataContext>
+		<local:MainViewModel/>
+	</Window.DataContext>
 	<Grid Margin="5,5,5,5" ShowGridLines="True">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
@@ -85,23 +88,23 @@
 		<TextBox Grid.Column="3" Grid.Row="7" Text="{Binding DailyConsumeGear.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
 		<TextBox Grid.Column="3" Grid.Row="8" Text="{Binding DailyConsumeCoin.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
 
-		<TextBox Grid.Column="4" Grid.Row="1" Text="{Binding ProductFuel.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="4" Grid.Row="2" Text="{Binding ProductAmmo.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="4" Grid.Row="3" Text="{Binding ProductSteel.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="4" Grid.Row="4" Text="{Binding ProductBaux.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="4" Grid.Row="5" Text="{Binding ProductBucket.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="4" Grid.Row="6" Text="{Binding ProductBurner.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="4" Grid.Row="7" Text="{Binding ProductGear.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="4" Grid.Row="8" Text="{Binding ProductCoin.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="1" Text="{Binding ProductFuel.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="2" Text="{Binding ProductAmmo.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="3" Text="{Binding ProductSteel.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="4" Text="{Binding ProductBaux.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="5" Text="{Binding ProductBucket.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="6" Text="{Binding ProductBurner.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="7" Text="{Binding ProductGear.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="4" Grid.Row="8" Text="{Binding ProductCoin.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
 
-		<TextBox Grid.Column="5" Grid.Row="1" Text="{Binding DailyProductFuel.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="5" Grid.Row="2" Text="{Binding DailyProductAmmo.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="5" Grid.Row="3" Text="{Binding DailyProductSteel.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="5" Grid.Row="4" Text="{Binding DailyProductBaux.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="5" Grid.Row="5" Text="{Binding DailyProductBucket.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="5" Grid.Row="6" Text="{Binding DailyProductBurner.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="5" Grid.Row="7" Text="{Binding DailyProductGear.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
-		<TextBox Grid.Column="5" Grid.Row="8" Text="{Binding DailyProductCoin.Value,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="1" Text="{Binding DailyProductFuel.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="2" Text="{Binding DailyProductAmmo.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="3" Text="{Binding DailyProductSteel.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="4" Text="{Binding DailyProductBaux.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="5" Text="{Binding DailyProductBucket.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="6" Text="{Binding DailyProductBurner.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="7" Text="{Binding DailyProductGear.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
+		<TextBox Grid.Column="5" Grid.Row="8" Text="{Binding DailyProductCoin.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
 		<!-- 設定項目 -->
 		<TextBlock Grid.Row="10" Grid.Column="0" Text="艦隊数" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
 		<TextBlock Grid.Row="10" Grid.Column="1" Text="大成功？" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
@@ -153,6 +156,6 @@
 			<ComboBoxItem Content="10時間"/>
 		</ComboBox>
 		<!-- 実行ボタン -->
-		<Button Grid.Row="0" Grid.Column="0" Content="最適化！" Command="{Binding OptimizeExpCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+		<Button Grid.Row="0" Grid.Column="0" Content="最適化！" Command="{Binding OptimizeExpCommand.Value}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
 	</Grid>
 </Window>
