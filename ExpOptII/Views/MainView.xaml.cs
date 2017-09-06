@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ExpOptII.Models;
+using Prism.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +21,7 @@ namespace ExpOptII.Views {
 	public partial class MainView : Window {
 		public MainView() {
 			InitializeComponent();
+			Messenger.Instance.GetEvent<PubSubEvent<string>>().Subscribe(d => MessageBox.Show(d));
 		}
 	}
 }
