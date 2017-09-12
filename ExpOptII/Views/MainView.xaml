@@ -49,14 +49,14 @@
 		<TextBlock Grid.Row="0" Grid.Column="4" Text="生産量" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
 		<TextBlock Grid.Row="0" Grid.Column="5" Text="生産量/日" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
 		<!-- 上部入力欄 -->
-		<TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NeedFuel.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NeedAmmo.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="1" Grid.Row="3" Text="{Binding NeedSteel.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"  HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="1" Grid.Row="4" Text="{Binding NeedBaux.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="1" Grid.Row="5" Text="{Binding NeedBucket.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="1" Grid.Row="6" Text="{Binding NeedBurner.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="1" Grid.Row="7" Text="{Binding NeedGear.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="1" Grid.Row="8" Text="{Binding NeedCoin.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NeedFuel.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NeedAmmo.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="3" Text="{Binding NeedSteel.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"  HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="4" Text="{Binding NeedBaux.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="5" Text="{Binding NeedBucket.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="6" Text="{Binding NeedBurner.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="7" Text="{Binding NeedGear.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="1" Grid.Row="8" Text="{Binding NeedCoin.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
 
 		<ComboBox Grid.Column="2" Grid.Row="1" SelectedIndex="{Binding HasSupplyFuel.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,1" FontSize="20">
 			<ComboBoxItem Content="あり"/>
@@ -79,14 +79,14 @@
 		<Rectangle Grid.Column="2" Grid.Row="7" Fill="LightGray" />
 		<Rectangle Grid.Column="2" Grid.Row="8" Fill="LightGray" />
 
-		<TextBox Grid.Column="3" Grid.Row="1" Text="{Binding DailyConsumeFuel.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="3" Grid.Row="2" Text="{Binding DailyConsumeAmmo.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="3" Grid.Row="3" Text="{Binding DailyConsumeSteel.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"  HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="3" Grid.Row="4" Text="{Binding DailyConsumeBaux.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="3" Grid.Row="5" Text="{Binding DailyConsumeBucket.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="3" Grid.Row="6" Text="{Binding DailyConsumeBurner.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="3" Grid.Row="7" Text="{Binding DailyConsumeGear.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
-		<TextBox Grid.Column="3" Grid.Row="8" Text="{Binding DailyConsumeCoin.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="1" Text="{Binding DailyConsumeFuel.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="2" Text="{Binding DailyConsumeAmmo.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="3" Text="{Binding DailyConsumeSteel.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"  HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="4" Text="{Binding DailyConsumeBaux.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="5" Text="{Binding DailyConsumeBucket.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="6" Text="{Binding DailyConsumeBurner.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="7" Text="{Binding DailyConsumeGear.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
+		<TextBox Grid.Column="3" Grid.Row="8" Text="{Binding DailyConsumeCoin.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20"/>
 
 		<TextBox Grid.Column="4" Grid.Row="1" Text="{Binding ProductFuel.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>
 		<TextBox Grid.Column="4" Grid.Row="2" Text="{Binding ProductAmmo.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   HorizontalContentAlignment="Right" Margin="1,1,1,1" FontSize="20" IsEnabled="False"/>

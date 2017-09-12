@@ -12,28 +12,28 @@ namespace ExpOptII.ViewModels
 		private Model model;
 		#region 上部入力欄
 		// 必要量
-		[IntValidation] public ReactiveProperty<int> NeedFuel { get; }
-		[IntValidation] public ReactiveProperty<int> NeedAmmo { get; }
-		[IntValidation] public ReactiveProperty<int> NeedSteel { get; }
-		[IntValidation] public ReactiveProperty<int> NeedBaux { get; }
-		[IntValidation] public ReactiveProperty<int> NeedBucket { get; }
-		[IntValidation] public ReactiveProperty<int> NeedBurner { get; }
-		[IntValidation] public ReactiveProperty<int> NeedGear { get; }
-		[IntValidation] public ReactiveProperty<int> NeedCoin { get; }
+		[IntValidation] public ReactiveProperty<string> NeedFuel { get; }
+		[IntValidation] public ReactiveProperty<string> NeedAmmo { get; }
+		[IntValidation] public ReactiveProperty<string> NeedSteel { get; }
+		[IntValidation] public ReactiveProperty<string> NeedBaux { get; }
+		[IntValidation] public ReactiveProperty<string> NeedBucket { get; }
+		[IntValidation] public ReactiveProperty<string> NeedBurner { get; }
+		[IntValidation] public ReactiveProperty<string> NeedGear { get; }
+		[IntValidation] public ReactiveProperty<string> NeedCoin { get; }
 		// 自然回復
 		public ReactiveProperty<int> HasSupplyFuel { get; }
 		public ReactiveProperty<int> HasSupplyAmmo { get; }
 		public ReactiveProperty<int> HasSupplySteel { get; }
 		public ReactiveProperty<int> HasSupplyBaux { get; }
 		// 消費量/日
-		[IntValidation] public ReactiveProperty<int> DailyConsumeFuel { get; }
-		[IntValidation] public ReactiveProperty<int> DailyConsumeAmmo { get; }
-		[IntValidation] public ReactiveProperty<int> DailyConsumeSteel { get; }
-		[IntValidation] public ReactiveProperty<int> DailyConsumeBaux { get; }
-		[IntValidation] public ReactiveProperty<int> DailyConsumeBucket { get; }
-		[IntValidation] public ReactiveProperty<int> DailyConsumeBurner { get; }
-		[IntValidation] public ReactiveProperty<int> DailyConsumeGear { get; }
-		[IntValidation] public ReactiveProperty<int> DailyConsumeCoin { get; }
+		[IntValidation] public ReactiveProperty<string> DailyConsumeFuel { get; }
+		[IntValidation] public ReactiveProperty<string> DailyConsumeAmmo { get; }
+		[IntValidation] public ReactiveProperty<string> DailyConsumeSteel { get; }
+		[IntValidation] public ReactiveProperty<string> DailyConsumeBaux { get; }
+		[IntValidation] public ReactiveProperty<string> DailyConsumeBucket { get; }
+		[IntValidation] public ReactiveProperty<string> DailyConsumeBurner { get; }
+		[IntValidation] public ReactiveProperty<string> DailyConsumeGear { get; }
+		[IntValidation] public ReactiveProperty<string> DailyConsumeCoin { get; }
 		// 生産量
 		public ReactiveProperty<int> ProductFuel { get; set; }
 		public ReactiveProperty<int> ProductAmmo { get; set; }
@@ -69,14 +69,14 @@ namespace ExpOptII.ViewModels
 			model = new Model();
 			// 紐付け
 			#region 必要量
-			NeedFuel = model.ObserveProperty(x => x.NeedFuel).ToReactiveProperty();
-			NeedAmmo = model.ObserveProperty(x => x.NeedAmmo).ToReactiveProperty();
-			NeedSteel = model.ObserveProperty(x => x.NeedSteel).ToReactiveProperty();
-			NeedBaux = model.ObserveProperty(x => x.NeedBaux).ToReactiveProperty();
-			NeedBucket = model.ObserveProperty(x => x.NeedBucket).ToReactiveProperty();
-			NeedBurner = model.ObserveProperty(x => x.NeedBurner).ToReactiveProperty();
-			NeedGear = model.ObserveProperty(x => x.NeedGear).ToReactiveProperty();
-			NeedCoin = model.ObserveProperty(x => x.NeedCoin).ToReactiveProperty();
+			NeedFuel   = model.ToReactivePropertyAsSynchronized(w => w.NeedFuel  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedFuel  );
+			NeedAmmo   = model.ToReactivePropertyAsSynchronized(w => w.NeedAmmo  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedAmmo  );
+			NeedSteel  = model.ToReactivePropertyAsSynchronized(w => w.NeedSteel , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedSteel );
+			NeedBaux   = model.ToReactivePropertyAsSynchronized(w => w.NeedBaux  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedBaux  );
+			NeedBucket = model.ToReactivePropertyAsSynchronized(w => w.NeedBucket, w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedBucket);
+			NeedBurner = model.ToReactivePropertyAsSynchronized(w => w.NeedBurner, w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedBurner);
+			NeedGear   = model.ToReactivePropertyAsSynchronized(w => w.NeedGear  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedGear  );
+			NeedCoin   = model.ToReactivePropertyAsSynchronized(w => w.NeedCoin  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedCoin  );
 			#endregion
 			#region 自然回復
 			HasSupplyFuel = model.ObserveProperty(x => x.HasSupplyFuel).ToReactiveProperty();
@@ -85,14 +85,14 @@ namespace ExpOptII.ViewModels
 			HasSupplyBaux = model.ObserveProperty(x => x.HasSupplyBaux).ToReactiveProperty();
 			#endregion
 			#region 消費量/日
-			DailyConsumeFuel = model.ObserveProperty(x => x.DailyConsumeFuel).ToReactiveProperty();
-			DailyConsumeAmmo = model.ObserveProperty(x => x.DailyConsumeAmmo).ToReactiveProperty();
-			DailyConsumeSteel = model.ObserveProperty(x => x.DailyConsumeSteel).ToReactiveProperty();
-			DailyConsumeBaux = model.ObserveProperty(x => x.DailyConsumeBaux).ToReactiveProperty();
-			DailyConsumeBucket = model.ObserveProperty(x => x.DailyConsumeBucket).ToReactiveProperty();
-			DailyConsumeBurner = model.ObserveProperty(x => x.DailyConsumeBurner).ToReactiveProperty();
-			DailyConsumeGear = model.ObserveProperty(x => x.DailyConsumeGear).ToReactiveProperty();
-			DailyConsumeCoin = model.ObserveProperty(x => x.DailyConsumeCoin).ToReactiveProperty();
+			DailyConsumeFuel   = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeFuel  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeFuel  );
+			DailyConsumeAmmo   = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeAmmo  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeAmmo  );
+			DailyConsumeSteel  = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeSteel , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeSteel );
+			DailyConsumeBaux   = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeBaux  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeBaux  );
+			DailyConsumeBucket = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeBucket, w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeBucket);
+			DailyConsumeBurner = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeBurner, w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeBurner);
+			DailyConsumeGear   = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeGear  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeGear  );
+			DailyConsumeCoin   = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeCoin  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeCoin  );
 			#endregion
 			#region 生産量
 			ProductFuel = ReactiveProperty.FromObject(model, x => x.ProductFuel);
@@ -123,7 +123,7 @@ namespace ExpOptII.ViewModels
 			SleepingTimeType = model.ObserveProperty(x => x.SleepingTimeType).ToReactiveProperty();
 			#endregion
 			// ボタン操作を設定
-			OptimizeExpCommand = NeedFuel.ObserveHasErrors.ToReactiveCommand();
+			OptimizeExpCommand = NeedFuel.ObserveHasErrors.Select(w => !w).ToReactiveCommand();
 			OptimizeExpCommand.Subscribe(_ => Messenger.Instance.GetEvent<PubSubEvent<string>>().Publish(model.OptimizeExp()));
 		}
 	}
