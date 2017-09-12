@@ -156,6 +156,6 @@
 			<ComboBoxItem Content="10時間"/>
 		</ComboBox>
 		<!-- 実行ボタン -->
-		<Button Grid.Row="0" Grid.Column="0" Content="最適化！" Command="{Binding OptimizeExpCommand.Value}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+		<Button Grid.Row="0" Grid.Column="0" Content="最適化！" Command="{Binding OptimizeExpCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
 	</Grid>
 </Window>

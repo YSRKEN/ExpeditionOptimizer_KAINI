@@ -4,6 +4,7 @@ using Prism.Events;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using ExpOptII.Models;
+using System.Linq;
 
 namespace ExpOptII.ViewModels
 {
@@ -123,7 +124,24 @@ namespace ExpOptII.ViewModels
 			SleepingTimeType = model.ObserveProperty(x => x.SleepingTimeType).ToReactiveProperty();
 			#endregion
 			// ボタン操作を設定
-			OptimizeExpCommand = NeedFuel.ObserveHasErrors.Select(w => !w).ToReactiveCommand();
+			OptimizeExpCommand = new[]{
+				NeedFuel   .ObserveHasErrors,
+				NeedAmmo   .ObserveHasErrors,
+				NeedSteel  .ObserveHasErrors,
+				NeedBaux   .ObserveHasErrors,
+				NeedBucket .ObserveHasErrors,
+				NeedBurner .ObserveHasErrors,
+				NeedGear   .ObserveHasErrors,
+				NeedCoin   .ObserveHasErrors,
+				DailyConsumeFuel   .ObserveHasErrors,
+				DailyConsumeAmmo   .ObserveHasErrors,
+				DailyConsumeSteel  .ObserveHasErrors,
+				DailyConsumeBaux   .ObserveHasErrors,
+				DailyConsumeBucket .ObserveHasErrors,
+				DailyConsumeBurner .ObserveHasErrors,
+				DailyConsumeGear   .ObserveHasErrors,
+				DailyConsumeCoin   .ObserveHasErrors,
+			}.CombineLatestValuesAreAllFalse().ToReactiveCommand();
 			OptimizeExpCommand.Subscribe(_ => Messenger.Instance.GetEvent<PubSubEvent<string>>().Publish(model.OptimizeExp()));
 		}
 	}
