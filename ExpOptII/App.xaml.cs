@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpOptII.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,9 +14,11 @@ namespace ExpOptII {
 	public partial class App : Application {
 		protected override void OnStartup(StartupEventArgs e) {
 			base.OnStartup(e);
-
+			// アプリの起動
 			var bootstrapper = new Bootstrapper();
 			bootstrapper.Run();
+			// データベースの読み込み
+			Database.Initialize();
 		}
 	}
 }
