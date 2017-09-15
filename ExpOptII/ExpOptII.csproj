@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="libglpk-cli, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\libglpk-cli.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
     </Reference>
@@ -122,6 +126,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Libs\GlpkWrapperCS.cs" />
     <Compile Include="Models\Database.cs" />
     <Compile Include="Models\IntValidation.cs" />
     <Compile Include="Models\Messenger.cs" />

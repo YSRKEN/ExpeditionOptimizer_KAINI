@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Prism.Mvvm;
+using GlpkWrapperCS;
 
 namespace ExpOptII.Models
 {
@@ -67,6 +68,60 @@ namespace ExpOptII.Models
 		#endregion
 		// 最適化処理
 		public string OptimizeExp() {
+			// 遠征リストを作成する
+			var nowExpList = new List<List<double>>();
+			foreach (var expInfo in Database.ExpList.Values) {
+				// 各遠征の「情報」を初期化する
+				// [0] 遠征時間(分単位)
+				// [1]～[8] 燃弾鋼ボ修炎開貨
+				int rawExpTime = 0;
+				var rawExpData = Enumerable.Repeat(0.0, 8).ToList();
+				rawExpTime = int.Parse(expInfo["遠征時間(分)"]);
+				rawExpData[0] = double.Parse(expInfo["報酬燃料"]);
+				rawExpData[1] = double.Parse(expInfo["報酬弾薬"]);
+				rawExpData[2] = double.Parse(expInfo["報酬鋼材"]);
+				rawExpData[3] = double.Parse(expInfo["報酬ボーキ"]);
+				rawExpData[4] = double.Parse(expInfo["左側バケツ"]);
+				rawExpData[5] = double.Parse(expInfo["左側バーナー"]);
+				rawExpData[6] = double.Parse(expInfo["左側ギア"]);
+				rawExpData[7] = double.Parse(expInfo["左側コイン"]);
+				// 入力した設定により、遠征の各数値を変化させる
+				var nowExpData = Enumerable.Repeat(0.0, 9).ToList();
+				{
+					// 「確認間隔」で遠征時間を弄る
+					var expTimeInterval = new int[] { 1,10,60,120,180,480,1440 };
+					int nowExpTimeInterval = expTimeInterval[CheckIntervalType];
+					if(rawExpTime % nowExpTimeInterval == 0) {
+						nowExpData[8] = rawExpTime;
+					}
+					else {
+						nowExpData[8] = (rawExpTime / nowExpTimeInterval + 1) * nowExpTimeInterval;
+					}
+				}
+				{
+					// 「大成功」で大成功率を管理し、
+					// 「収量増加」で通常資材の収量を上げる
+					var supplyBonusPer = new double[] { 1.0, 1.05, 1.10, 1.15, 1.20 };
+					double nowSupplyBonus = supplyBonusPer[SupplyBonusType];
+					nowExpData[0] = rawExpData[0] * nowSupplyBonus - double.Parse(expInfo["消費燃料"]);
+					nowExpData[1] = rawExpData[1] * nowSupplyBonus - double.Parse(expInfo["消費弾薬"]);
+					nowExpData[2] = rawExpData[2] * nowSupplyBonus;
+					nowExpData[3] = rawExpData[3] * nowSupplyBonus;
+				}
+				// 遠征情報を追加する
+				nowExpList.Add(nowExpData);
+			}
+			// 問題データを作成し、解かせる
+			using(var problem = new MipProblem()) {
+				// 最適化の方向
+				problem.ObjDir = ObjectDirection.Minimize;
+				// 制約式の数・名前・範囲
+
+			}
+			//No.	海域名	位置	遠征名	旗艦練度	合計練度	最小人数	必要艦種	遠征時間(分)
+			//報酬燃料	報酬弾薬	報酬鋼材	報酬ボーキ
+			//左側バケツ	左側バーナー	左側ギア	左側コイン	右側バケツ	右側バーナー	右側ギア	右側コイン
+			//消費燃料	消費弾薬
 			return "";
 		}
 	}
