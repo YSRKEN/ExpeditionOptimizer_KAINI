@@ -58,7 +58,7 @@ namespace ExpOptII.Models
 		public double DailyProductCoin   { get => dailyProductItem[7]; set { SetProperty(ref dailyProductItem[7], value); } }
 		#endregion
 		#region 下部入力欄
-		private int[] optionItem = new int[6] {2,0,2,0,4,4};
+		public int[] optionItem = new int[6] {2,0,2,0,4,4};
 		public int FleetCountType    { get => optionItem[0]; set { SetProperty(ref optionItem[0], value); } }
 		public int GreatSuccessType  { get => optionItem[1]; set { SetProperty(ref optionItem[1], value); } }
 		public int CheckIntervalType { get => optionItem[2]; set { SetProperty(ref optionItem[2], value); } }
@@ -85,6 +85,59 @@ namespace ExpOptII.Models
 				rawExpData[5] = double.Parse(expInfo["左側バーナー"]);
 				rawExpData[6] = double.Parse(expInfo["左側ギア"]);
 				rawExpData[7] = double.Parse(expInfo["左側コイン"]);
+				// 遠征の大成功率を計算する
+				double greatSuccessProb = 0.0;
+				{
+					switch (GreatSuccessType) {
+					case 0:
+						// 「なし」
+						greatSuccessProb = 0.0;
+						break;
+					case 1:
+						// 「半ドラム」
+						switch (expInfo["遠征名"]) {
+						case "北方鼠輸送作戦":
+							greatSuccessProb = 0.375;
+							break;
+						case "北方航路海上護衛":
+							greatSuccessProb = 0.430;
+							break;
+						case "東京急行":
+							greatSuccessProb = 0.450;
+							break;
+						case "東京急行（弐）":
+							greatSuccessProb = 0.417;
+							break;
+						case "水上機前線輸送":
+							greatSuccessProb = 0.427;
+							break;
+						default:
+							greatSuccessProb = 0.0;
+							break;
+						}
+						break;
+					case 2:
+						// 「全ドラム」
+						switch (expInfo["遠征名"]) {
+						case "北方鼠輸送作戦":
+						case "北方航路海上護衛":
+						case "東京急行":
+						case "東京急行（弐）":
+						case "水上機前線輸送":
+							greatSuccessProb = 1.0;
+							break;
+						default:
+							greatSuccessProb = 0.0;
+							break;
+						}
+						break;
+					case 3:
+						// 「あり」
+						greatSuccessProb = 1.0;
+						break;
+					}
+				}
+				double greatSuccessMulti = greatSuccessProb * 1.5 + (1.0 - greatSuccessProb) * 1.0;
 				// 入力した設定により、遠征の各数値を変化させる
 				var nowExpData = Enumerable.Repeat(0.0, 9).ToList();
 				{
@@ -103,13 +156,25 @@ namespace ExpOptII.Models
 					// 「収量増加」で通常資材の収量を上げる
 					var supplyBonusPer = new double[] { 1.0, 1.05, 1.10, 1.15, 1.20 };
 					double nowSupplyBonus = supplyBonusPer[SupplyBonusType];
-					nowExpData[0] = rawExpData[0] * nowSupplyBonus - double.Parse(expInfo["消費燃料"]);
-					nowExpData[1] = rawExpData[1] * nowSupplyBonus - double.Parse(expInfo["消費弾薬"]);
-					nowExpData[2] = rawExpData[2] * nowSupplyBonus;
-					nowExpData[3] = rawExpData[3] * nowSupplyBonus;
+					nowExpData[0] = rawExpData[0] * nowSupplyBonus * greatSuccessMulti - double.Parse(expInfo["消費燃料"]);
+					nowExpData[1] = rawExpData[1] * nowSupplyBonus * greatSuccessMulti - double.Parse(expInfo["消費弾薬"]);
+					nowExpData[2] = rawExpData[2] * nowSupplyBonus * greatSuccessMulti;
+					nowExpData[3] = rawExpData[3] * nowSupplyBonus * greatSuccessMulti;
+				}
+				{
+					nowExpData[4] = rawExpData[4] * 0.5 + greatSuccessProb * double.Parse(expInfo["右側バケツ"]);
+					nowExpData[5] = rawExpData[5] * 0.5 + greatSuccessProb * double.Parse(expInfo["右側バーナー"]);
+					nowExpData[6] = rawExpData[6] * 0.5 + greatSuccessProb * double.Parse(expInfo["右側ギア"]);
+					nowExpData[7] = rawExpData[7] * 0.5 + greatSuccessProb * double.Parse(expInfo["右側コイン"]);
 				}
 				// 遠征情報を追加する
 				nowExpList.Add(nowExpData);
+			}
+			foreach(var expData in nowExpList) {
+				foreach(var data in expData) {
+					Console.Write($"{data}\t");
+				}
+				Console.WriteLine("");
 			}
 			// 問題データを作成し、解かせる
 			using(var problem = new MipProblem()) {
