@@ -116,12 +116,12 @@ namespace ExpOptII.ViewModels
 			DailyProductCoin = ReactiveProperty.FromObject(model, x => x.DailyProductCoin);
 			#endregion
 			#region 下部入力欄
-			FleetCountType = model.ObserveProperty(x => x.FleetCountType).ToReactiveProperty();
-			GreatSuccessType = model.ObserveProperty(x => x.GreatSuccessType).ToReactiveProperty();
-			CheckIntervalType = model.ObserveProperty(x => x.CheckIntervalType).ToReactiveProperty();
-			SupplyBonusType = model.ObserveProperty(x => x.SupplyBonusType).ToReactiveProperty();
-			OpenedMapType = model.ObserveProperty(x => x.OpenedMapType).ToReactiveProperty();
-			SleepingTimeType = model.ObserveProperty(x => x.SleepingTimeType).ToReactiveProperty();
+			FleetCountType = model.ToReactivePropertyAsSynchronized(x => x.FleetCountType);
+			GreatSuccessType = model.ToReactivePropertyAsSynchronized(x => x.GreatSuccessType);
+			CheckIntervalType = model.ToReactivePropertyAsSynchronized(x => x.CheckIntervalType);
+			SupplyBonusType = model.ToReactivePropertyAsSynchronized(x => x.SupplyBonusType);
+			OpenedMapType = model.ToReactivePropertyAsSynchronized(x => x.OpenedMapType);
+			SleepingTimeType = model.ToReactivePropertyAsSynchronized(x => x.SleepingTimeType);
 			#endregion
 			// ボタン操作を設定
 			OptimizeExpCommand = new[]{

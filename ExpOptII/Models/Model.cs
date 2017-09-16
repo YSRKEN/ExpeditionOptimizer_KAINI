@@ -156,16 +156,16 @@ namespace ExpOptII.Models
 					// 「収量増加」で通常資材の収量を上げる
 					var supplyBonusPer = new double[] { 1.0, 1.05, 1.10, 1.15, 1.20 };
 					double nowSupplyBonus = supplyBonusPer[SupplyBonusType];
-					nowExpData[0] = rawExpData[0] * nowSupplyBonus * greatSuccessMulti - double.Parse(expInfo["消費燃料"]);
-					nowExpData[1] = rawExpData[1] * nowSupplyBonus * greatSuccessMulti - double.Parse(expInfo["消費弾薬"]);
-					nowExpData[2] = rawExpData[2] * nowSupplyBonus * greatSuccessMulti;
-					nowExpData[3] = rawExpData[3] * nowSupplyBonus * greatSuccessMulti;
+					nowExpData[0] = Math.Floor(rawExpData[0] * nowSupplyBonus * greatSuccessMulti - double.Parse(expInfo["消費燃料"]));
+					nowExpData[1] = Math.Floor(rawExpData[1] * nowSupplyBonus * greatSuccessMulti - double.Parse(expInfo["消費弾薬"]));
+					nowExpData[2] = Math.Floor(rawExpData[2] * nowSupplyBonus * greatSuccessMulti);
+					nowExpData[3] = Math.Floor(rawExpData[3] * nowSupplyBonus * greatSuccessMulti);
 				}
 				{
-					nowExpData[4] = rawExpData[4] * 0.5 + greatSuccessProb * double.Parse(expInfo["右側バケツ"]);
-					nowExpData[5] = rawExpData[5] * 0.5 + greatSuccessProb * double.Parse(expInfo["右側バーナー"]);
-					nowExpData[6] = rawExpData[6] * 0.5 + greatSuccessProb * double.Parse(expInfo["右側ギア"]);
-					nowExpData[7] = rawExpData[7] * 0.5 + greatSuccessProb * double.Parse(expInfo["右側コイン"]);
+					nowExpData[4] = rawExpData[4] + greatSuccessProb * double.Parse(expInfo["右側バケツ"]);
+					nowExpData[5] = rawExpData[5] + greatSuccessProb * double.Parse(expInfo["右側バーナー"]);
+					nowExpData[6] = rawExpData[6] + greatSuccessProb * double.Parse(expInfo["右側ギア"]);
+					nowExpData[7] = rawExpData[7] + greatSuccessProb * double.Parse(expInfo["右側コイン"]);
 				}
 				// 遠征情報を追加する
 				nowExpList.Add(nowExpData);
