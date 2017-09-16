@@ -177,7 +177,23 @@ namespace ExpOptII.Models
 				Console.WriteLine("");
 			}
 			// 問題データを作成し、解かせる
-			using(var problem = new MipProblem()) {
+			// [定数]
+			// s1～sM：各資源の必要量
+			// Amn：n番目の遠征における資源mの収量(nowExpListから読み取る)
+			// Tn：n番目の遠征の遠征時間
+			// Yn：n番目の遠征の実行回数上限(可能ならINT.MAX、不可能なら0)
+			// FleetCount：出撃する艦隊数
+			// [変数]　(N+1)個
+			// x1～xN：各遠征の実行回数。0以上の整数
+			// ExpTime：最終的な遠征時間。実数
+			// [目的関数]
+			// ExpTime：最小化したい変数
+			// [制約条件]　(M+N*2+1)個
+			// Am1 * x1 + Am2 * x2 +...+ AmN * xN ≧ sm：(M本)：資源制約
+			// T1 * x1 + T2 * x2 +...+ TN * xN - ExpTime * FleetCount ≦ 0：(1本)：(全遠征の合計消費時間)／艦隊数≦ExpTime
+			// Tn * xn - ExpTime ≦ 0：(N本)：各遠征について、合計消費時間≦ExpTime
+			// xn ≦ Yn：(N本)：各遠征について、実行回数の上限がある
+			using (var problem = new MipProblem()) {
 				// 最適化の方向
 				problem.ObjDir = ObjectDirection.Minimize;
 				// 制約式の数・名前・範囲
