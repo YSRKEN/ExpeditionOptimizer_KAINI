@@ -80,10 +80,10 @@ namespace ExpOptII.ViewModels
 			NeedCoin   = model.ToReactivePropertyAsSynchronized(w => w.NeedCoin  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedCoin  );
 			#endregion
 			#region 自然回復
-			HasSupplyFuel = model.ObserveProperty(x => x.HasSupplyFuel).ToReactiveProperty();
-			HasSupplyAmmo = model.ObserveProperty(x => x.HasSupplyAmmo).ToReactiveProperty();
-			HasSupplySteel = model.ObserveProperty(x => x.HasSupplySteel).ToReactiveProperty();
-			HasSupplyBaux = model.ObserveProperty(x => x.HasSupplyBaux).ToReactiveProperty();
+			HasSupplyFuel = model.ToReactivePropertyAsSynchronized(x => x.HasSupplyFuel);
+			HasSupplyAmmo = model.ToReactivePropertyAsSynchronized(x => x.HasSupplyAmmo);
+			HasSupplySteel = model.ToReactivePropertyAsSynchronized(x => x.HasSupplySteel);
+			HasSupplyBaux = model.ToReactivePropertyAsSynchronized(x => x.HasSupplyBaux);
 			#endregion
 			#region 消費量/日
 			DailyConsumeFuel   = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeFuel  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeFuel  );
@@ -96,24 +96,24 @@ namespace ExpOptII.ViewModels
 			DailyConsumeCoin   = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeCoin  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeCoin  );
 			#endregion
 			#region 生産量
-			ProductFuel = ReactiveProperty.FromObject(model, x => x.ProductFuel);
-			ProductAmmo = ReactiveProperty.FromObject(model, x => x.ProductAmmo);
-			ProductSteel = ReactiveProperty.FromObject(model, x => x.ProductSteel);
-			ProductBaux = ReactiveProperty.FromObject(model, x => x.ProductBaux);
-			ProductBucket = ReactiveProperty.FromObject(model, x => x.ProductBucket);
-			ProductBurner = ReactiveProperty.FromObject(model, x => x.ProductBurner);
-			ProductGear = ReactiveProperty.FromObject(model, x => x.ProductGear);
-			ProductCoin = ReactiveProperty.FromObject(model, x => x.ProductCoin);
+			ProductFuel   = model.ToReactivePropertyAsSynchronized(x => x.ProductFuel  );
+			ProductAmmo   = model.ToReactivePropertyAsSynchronized(x => x.ProductAmmo  );
+			ProductSteel  = model.ToReactivePropertyAsSynchronized(x => x.ProductSteel );
+			ProductBaux   = model.ToReactivePropertyAsSynchronized(x => x.ProductBaux  );
+			ProductBucket = model.ToReactivePropertyAsSynchronized(x => x.ProductBucket);
+			ProductBurner = model.ToReactivePropertyAsSynchronized(x => x.ProductBurner);
+			ProductGear   = model.ToReactivePropertyAsSynchronized(x => x.ProductGear  );
+			ProductCoin   = model.ToReactivePropertyAsSynchronized(x => x.ProductCoin  );
 			#endregion
 			#region 生産量/日
-			DailyProductFuel = ReactiveProperty.FromObject(model, x => x.DailyProductFuel);
-			DailyProductAmmo = ReactiveProperty.FromObject(model, x => x.DailyProductAmmo);
-			DailyProductSteel = ReactiveProperty.FromObject(model, x => x.DailyProductSteel);
-			DailyProductBaux = ReactiveProperty.FromObject(model, x => x.DailyProductBaux);
-			DailyProductBucket = ReactiveProperty.FromObject(model, x => x.DailyProductBucket);
-			DailyProductBurner = ReactiveProperty.FromObject(model, x => x.DailyProductBurner);
-			DailyProductGear = ReactiveProperty.FromObject(model, x => x.DailyProductGear);
-			DailyProductCoin = ReactiveProperty.FromObject(model, x => x.DailyProductCoin);
+			DailyProductFuel   = model.ToReactivePropertyAsSynchronized(x => x.DailyProductFuel);
+			DailyProductAmmo   = model.ToReactivePropertyAsSynchronized(x => x.DailyProductAmmo  );
+			DailyProductSteel  = model.ToReactivePropertyAsSynchronized(x => x.DailyProductSteel );
+			DailyProductBaux   = model.ToReactivePropertyAsSynchronized(x => x.DailyProductBaux  );
+			DailyProductBucket = model.ToReactivePropertyAsSynchronized(x => x.DailyProductBucket);
+			DailyProductBurner = model.ToReactivePropertyAsSynchronized(x => x.DailyProductBurner);
+			DailyProductGear   = model.ToReactivePropertyAsSynchronized(x => x.DailyProductGear  );
+			DailyProductCoin   = model.ToReactivePropertyAsSynchronized(x => x.DailyProductCoin  );
 			#endregion
 			#region 下部入力欄
 			FleetCountType = model.ToReactivePropertyAsSynchronized(x => x.FleetCountType);

@@ -21,7 +21,7 @@ namespace ExpOptII.Views {
 	public partial class MainView : Window {
 		public MainView() {
 			InitializeComponent();
-			Messenger.Instance.GetEvent<PubSubEvent<string>>().Subscribe(d => MessageBox.Show(d));
+			Messenger.Instance.GetEvent<PubSubEvent<string>>().Subscribe(d => MessageBox.Show(d, "遠征最適化ツール(改二)"));
 		}
 	}
 }
