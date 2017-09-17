@@ -180,18 +180,21 @@ namespace ExpOptII.Models
 			// [定数]
 			// s1～sM：各資源の必要量
 			// Amn：n番目の遠征における資源mの収量(nowExpListから読み取る)
-			// Tn：n番目の遠征の遠征時間
+			// Bm：資源mの1日あたりの消費量
+			// Tn：n番目の遠征の遠征時間[分]
 			// Yn：n番目の遠征の実行回数上限(可能ならINT.MAX、不可能なら0)
+			// Zm：m番目の資源の自然回復量[1／分]
+			// ExpTimeRatio：遠征に使える時間／実際の消費時間。一日X時間休むなら(24-X)／24
 			// FleetCount：出撃する艦隊数
 			// [変数]　(N+1)個
 			// x1～xN：各遠征の実行回数。0以上の整数
-			// ExpTime：最終的な遠征時間。実数
+			// ExpTime：最終的な遠征時間[分]。実数
 			// [目的関数]
 			// ExpTime：最小化したい変数
 			// [制約条件]　(M+N*2+1)個
-			// Am1 * x1 + Am2 * x2 +...+ AmN * xN ≧ sm：(M本)：資源制約
-			// T1 * x1 + T2 * x2 +...+ TN * xN - ExpTime * FleetCount ≦ 0：(1本)：(全遠征の合計消費時間)／艦隊数≦ExpTime
-			// Tn * xn - ExpTime ≦ 0：(N本)：各遠征について、合計消費時間≦ExpTime
+			// Am1 * x1 + Am2 * x2 +...+ AmN * xN + Zm * ExpTime - Bm * ExpTime / (60 * 24) ≧ sm：(M本)：資源制約
+			// T1 * x1 + T2 * x2 +...+ TN * xN - ExpTime * FleetCount * ExpTimeRatio ≦ 0：(1本)：(全遠征の合計消費時間)／艦隊数≦ExpTime・ExpTimeRatio
+			// Tn * xn - ExpTime * ExpTimeRatio ≦ 0：(N本)：各遠征について、合計消費時間≦ExpTime・ExpTimeRatio
 			// xn ≦ Yn：(N本)：各遠征について、実行回数の上限がある
 			using (var problem = new MipProblem()) {
 				// 最適化の方向
