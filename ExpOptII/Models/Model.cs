@@ -8,6 +8,9 @@ using GlpkWrapperCS;
 
 namespace ExpOptII.Models {
 	class Model : BindableBase {
+		private static readonly string SoftName = "遠征最適化ツール(改二)";
+		private string titleBar = SoftName;
+		public string TitleBar { get => titleBar; set { SetProperty(ref titleBar, value); } }
 		#region 上部入力欄
 		// 必要量
 		private int[] needItem = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -381,7 +384,7 @@ namespace ExpOptII.Models {
 						DailyProductGear = Math.Round(ProductGear * 60 * 24 / problem.MipObjValue, 1);
 						DailyProductCoin = Math.Round(ProductCoin * 60 * 24 / problem.MipObjValue, 1);
 						// 生産量を桁丸め
-						ProductFuel   = Math.Round(ProductFuel  , 1);
+						ProductFuel = Math.Round(ProductFuel, 1);
 						ProductAmmo   = Math.Round(ProductAmmo  , 1);
 						ProductSteel  = Math.Round(ProductSteel , 1);
 						ProductBaux   = Math.Round(ProductBaux  , 1);
@@ -394,9 +397,11 @@ namespace ExpOptII.Models {
 					foreach (var expInfo in doExpList.Where(p => p.Item1 > 0).OrderByDescending(p => p.Item3)) {
 						result += $"・{expInfo.Item2}　{expInfo.Item1}回\n";
 					}
+					TitleBar = $"{SoftName}　遠征時間→{ToTimeString(allExpTime)}";
 				}
 				else {
 					result = "実行可能解が出せませんでした。";
+					TitleBar = $"{SoftName}";
 				}
 			}
 			return result;

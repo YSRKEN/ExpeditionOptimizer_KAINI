@@ -6,7 +6,7 @@
 		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 		xmlns:local="clr-namespace:ExpOptII.ViewModels"
 		mc:Ignorable="d"
-		Title="遠征最適化ツール(改二)" Height="450" Width="600" ResizeMode="NoResize">
+		Title="{Binding TitleBar.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="450" Width="600" ResizeMode="NoResize">
 	<Window.DataContext>
 		<local:MainViewModel/>
 	</Window.DataContext>

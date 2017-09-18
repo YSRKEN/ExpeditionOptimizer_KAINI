@@ -11,6 +11,7 @@ namespace ExpOptII.ViewModels
 	class MainViewModel {
 		// modelのinstance
 		private Model model;
+		public ReactiveProperty<string> TitleBar { get; set; }
 		#region 上部入力欄
 		// 必要量
 		[IntValidation] public ReactiveProperty<string> NeedFuel { get; }
@@ -69,6 +70,7 @@ namespace ExpOptII.ViewModels
 			// 初期化
 			model = new Model();
 			// 紐付け
+			TitleBar = model.ToReactivePropertyAsSynchronized(x => x.TitleBar);
 			#region 必要量
 			NeedFuel   = model.ToReactivePropertyAsSynchronized(w => w.NeedFuel  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedFuel  );
 			NeedAmmo   = model.ToReactivePropertyAsSynchronized(w => w.NeedAmmo  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => NeedAmmo  );
@@ -96,7 +98,7 @@ namespace ExpOptII.ViewModels
 			DailyConsumeCoin   = model.ToReactivePropertyAsSynchronized(w => w.DailyConsumeCoin  , w => w.ToString(), int.Parse, ignoreValidationErrorValue: true).SetValidateAttribute(() => DailyConsumeCoin  );
 			#endregion
 			#region 生産量
-			ProductFuel   = model.ToReactivePropertyAsSynchronized(x => x.ProductFuel  );
+			ProductFuel   = model.ToReactivePropertyAsSynchronized(x => x.ProductFuel);
 			ProductAmmo   = model.ToReactivePropertyAsSynchronized(x => x.ProductAmmo  );
 			ProductSteel  = model.ToReactivePropertyAsSynchronized(x => x.ProductSteel );
 			ProductBaux   = model.ToReactivePropertyAsSynchronized(x => x.ProductBaux  );
