@@ -14,6 +14,15 @@ Optimize schedule of expedition for Kantai Collection and Warship Girls by C#
 # 取扱説明
 ![help](https://user-images.githubusercontent.com/3734392/30519574-dae29ada-9bd4-11e7-9777-c6386492cb92.png)
 
+# バージョン履歴
+
+## Ver.1.0.1
+- 生産量・デイリー生産量表示でデイリー消費を考慮するようにしました
+- 計算後に、総遠征時間をタイトルバーに表示するようにした
+
+## Ver.1.0.0
+- 最初のリリース
+
 # 取扱種別
 　フリーソフトウェア
 

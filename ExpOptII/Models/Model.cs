@@ -8,6 +8,9 @@ using GlpkWrapperCS;
 
 namespace ExpOptII.Models {
 	class Model : BindableBase {
+		private static readonly string SoftName = "遠征最適化ツール(改二)";
+		private string titleBar = SoftName;
+		public string TitleBar { get => titleBar; set { SetProperty(ref titleBar, value); } }
 		#region 上部入力欄
 		// 必要量
 		private int[] needItem = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -36,15 +39,15 @@ namespace ExpOptII.Models {
 		public int DailyConsumeGear { get => dailyConsumeItem[6]; set { SetProperty(ref dailyConsumeItem[6], value); } }
 		public int DailyConsumeCoin { get => dailyConsumeItem[7]; set { SetProperty(ref dailyConsumeItem[7], value); } }
 		// 生産量
-		private int[] productItem = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
-		public int ProductFuel { get => productItem[0]; set { SetProperty(ref productItem[0], value); } }
-		public int ProductAmmo { get => productItem[1]; set { SetProperty(ref productItem[1], value); } }
-		public int ProductSteel { get => productItem[2]; set { SetProperty(ref productItem[2], value); } }
-		public int ProductBaux { get => productItem[3]; set { SetProperty(ref productItem[3], value); } }
-		public int ProductBucket { get => productItem[4]; set { SetProperty(ref productItem[4], value); } }
-		public int ProductBurner { get => productItem[5]; set { SetProperty(ref productItem[5], value); } }
-		public int ProductGear { get => productItem[6]; set { SetProperty(ref productItem[6], value); } }
-		public int ProductCoin { get => productItem[7]; set { SetProperty(ref productItem[7], value); } }
+		private double[] productItem = new double[8] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+		public double ProductFuel { get => productItem[0]; set { SetProperty(ref productItem[0], value); } }
+		public double ProductAmmo { get => productItem[1]; set { SetProperty(ref productItem[1], value); } }
+		public double ProductSteel { get => productItem[2]; set { SetProperty(ref productItem[2], value); } }
+		public double ProductBaux { get => productItem[3]; set { SetProperty(ref productItem[3], value); } }
+		public double ProductBucket { get => productItem[4]; set { SetProperty(ref productItem[4], value); } }
+		public double ProductBurner { get => productItem[5]; set { SetProperty(ref productItem[5], value); } }
+		public double ProductGear { get => productItem[6]; set { SetProperty(ref productItem[6], value); } }
+		public double ProductCoin { get => productItem[7]; set { SetProperty(ref productItem[7], value); } }
 		// 生産量/日
 		private double[] dailyProductItem = new double[8] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 		public double DailyProductFuel { get => dailyProductItem[0]; set { SetProperty(ref dailyProductItem[0], value); } }
@@ -342,37 +345,63 @@ namespace ExpOptII.Models {
 						);
 					}
 					// 稼いだ資源量を画面に反映させる
-					ProductFuel = 0; ProductAmmo = 0; ProductSteel = 0; ProductBaux = 0;
-					ProductBucket = 0; ProductBurner = 0; ProductGear = 0; ProductCoin = 0;
-					for (int n = 0; n < N; ++n) {
-						ProductFuel   += (int)(nowExpList[n][0] * doExpList[n].Item1);
-						ProductAmmo   += (int)(nowExpList[n][1] * doExpList[n].Item1);
-						ProductSteel  += (int)(nowExpList[n][2] * doExpList[n].Item1);
-						ProductBaux   += (int)(nowExpList[n][3] * doExpList[n].Item1);
-						ProductBucket += (int)(nowExpList[n][4] * doExpList[n].Item1);
-						ProductBurner += (int)(nowExpList[n][5] * doExpList[n].Item1);
-						ProductGear   += (int)(nowExpList[n][6] * doExpList[n].Item1);
-						ProductCoin   += (int)(nowExpList[n][7] * doExpList[n].Item1);
+					{
+						// 生産量を初期化
+						ProductFuel = 0; ProductAmmo = 0; ProductSteel = 0; ProductBaux = 0;
+						ProductBucket = 0; ProductBurner = 0; ProductGear = 0; ProductCoin = 0;
+						// 遠征備蓄量を追加
+						for (int n = 0; n < N; ++n) {
+							ProductFuel += nowExpList[n][0] * doExpList[n].Item1;
+							ProductAmmo += nowExpList[n][1] * doExpList[n].Item1;
+							ProductSteel += nowExpList[n][2] * doExpList[n].Item1;
+							ProductBaux += nowExpList[n][3] * doExpList[n].Item1;
+							ProductBucket += nowExpList[n][4] * doExpList[n].Item1;
+							ProductBurner += nowExpList[n][5] * doExpList[n].Item1;
+							ProductGear += nowExpList[n][6] * doExpList[n].Item1;
+							ProductCoin += nowExpList[n][7] * doExpList[n].Item1;
+						}
+						// 自然回復量を追加
+						ProductFuel +=  (HasSupplyFuel == 0 ? 1.0 : 0.0) * allExpTime;
+						ProductAmmo +=  (HasSupplyAmmo == 0 ? 1.0 : 0.0) * allExpTime;
+						ProductSteel += (HasSupplySteel == 0 ? 1.0 : 0.0) * allExpTime;
+						ProductBaux +=  (HasSupplyBaux == 0 ? 1.0 : 0.0) * allExpTime / 3;
+						// デイリー消費量を追加
+						ProductFuel   -= DailyConsumeFuel   * problem.MipObjValue / 60 / 24;
+						ProductAmmo   -= DailyConsumeAmmo   * problem.MipObjValue / 60 / 24;
+						ProductSteel  -= DailyConsumeSteel  * problem.MipObjValue / 60 / 24;
+						ProductBaux   -= DailyConsumeBaux   * problem.MipObjValue / 60 / 24;
+						ProductBucket -= DailyConsumeBucket * problem.MipObjValue / 60 / 24;
+						ProductBurner -= DailyConsumeBurner * problem.MipObjValue / 60 / 24;
+						ProductGear   -= DailyConsumeGear   * problem.MipObjValue / 60 / 24;
+						ProductCoin   -= DailyConsumeCoin   * problem.MipObjValue / 60 / 24;
+						// デイリー生産量を計算
+						DailyProductFuel = Math.Round(ProductFuel * 60 * 24 / problem.MipObjValue, 1);
+						DailyProductAmmo = Math.Round(ProductAmmo * 60 * 24 / problem.MipObjValue, 1);
+						DailyProductSteel = Math.Round(ProductSteel * 60 * 24 / problem.MipObjValue, 1);
+						DailyProductBaux = Math.Round(ProductBaux * 60 * 24 / problem.MipObjValue, 1);
+						DailyProductBucket = Math.Round(ProductBucket * 60 * 24 / problem.MipObjValue, 1);
+						DailyProductBurner = Math.Round(ProductBurner * 60 * 24 / problem.MipObjValue, 1);
+						DailyProductGear = Math.Round(ProductGear * 60 * 24 / problem.MipObjValue, 1);
+						DailyProductCoin = Math.Round(ProductCoin * 60 * 24 / problem.MipObjValue, 1);
+						// 生産量を桁丸め
+						ProductFuel = Math.Round(ProductFuel, 1);
+						ProductAmmo   = Math.Round(ProductAmmo  , 1);
+						ProductSteel  = Math.Round(ProductSteel , 1);
+						ProductBaux   = Math.Round(ProductBaux  , 1);
+						ProductBucket = Math.Round(ProductBucket, 1);
+						ProductBurner = Math.Round(ProductBurner, 1);
+						ProductGear   = Math.Round(ProductGear  , 1);
+						ProductCoin   = Math.Round(ProductCoin  , 1);
 					}
-					ProductFuel  += (int)((HasSupplyFuel  == 0 ? 1.0 : 0.0) * allExpTime);
-					ProductAmmo  += (int)((HasSupplyAmmo  == 0 ? 1.0 : 0.0) * allExpTime);
-					ProductSteel += (int)((HasSupplySteel == 0 ? 1.0 : 0.0) * allExpTime);
-					ProductBaux  += (int)((HasSupplyBaux  == 0 ? 1.0 : 0.0) * allExpTime / 3);
-					DailyProductFuel   = Math.Round(ProductFuel * 60 * 24 / problem.MipObjValue, 1);
-					DailyProductAmmo   = Math.Round(ProductAmmo * 60 * 24 / problem.MipObjValue, 1);
-					DailyProductSteel  = Math.Round(ProductSteel * 60 * 24 / problem.MipObjValue, 1);
-					DailyProductBaux   = Math.Round(ProductBaux * 60 * 24 / problem.MipObjValue, 1);
-					DailyProductBucket = Math.Round(ProductBucket * 60 * 24 / problem.MipObjValue, 1);
-					DailyProductBurner = Math.Round(ProductBurner * 60 * 24 / problem.MipObjValue, 1);
-					DailyProductGear   = Math.Round(ProductGear * 60 * 24 / problem.MipObjValue, 1);
-					DailyProductCoin   = Math.Round(ProductCoin * 60 * 24 / problem.MipObjValue, 1);
 					// 結果を表示する
 					foreach (var expInfo in doExpList.Where(p => p.Item1 > 0).OrderByDescending(p => p.Item3)) {
 						result += $"・{expInfo.Item2}　{expInfo.Item1}回\n";
 					}
+					TitleBar = $"{SoftName}　遠征時間→{ToTimeString(allExpTime)}";
 				}
 				else {
 					result = "実行可能解が出せませんでした。";
+					TitleBar = $"{SoftName}";
 				}
 			}
 			return result;
