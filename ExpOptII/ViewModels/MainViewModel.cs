@@ -36,14 +36,14 @@ namespace ExpOptII.ViewModels
 		[IntValidation] public ReactiveProperty<string> DailyConsumeGear { get; }
 		[IntValidation] public ReactiveProperty<string> DailyConsumeCoin { get; }
 		// 生産量
-		public ReactiveProperty<int> ProductFuel { get; set; }
-		public ReactiveProperty<int> ProductAmmo { get; set; }
-		public ReactiveProperty<int> ProductSteel { get; set; }
-		public ReactiveProperty<int> ProductBaux { get; set; }
-		public ReactiveProperty<int> ProductBucket { get; set; }
-		public ReactiveProperty<int> ProductBurner { get; set; }
-		public ReactiveProperty<int> ProductGear { get; set; }
-		public ReactiveProperty<int> ProductCoin { get; set; }
+		public ReactiveProperty<double> ProductFuel { get; set; }
+		public ReactiveProperty<double> ProductAmmo { get; set; }
+		public ReactiveProperty<double> ProductSteel { get; set; }
+		public ReactiveProperty<double> ProductBaux { get; set; }
+		public ReactiveProperty<double> ProductBucket { get; set; }
+		public ReactiveProperty<double> ProductBurner { get; set; }
+		public ReactiveProperty<double> ProductGear { get; set; }
+		public ReactiveProperty<double> ProductCoin { get; set; }
 		// 生産量/日
 		public ReactiveProperty<double> DailyProductFuel { get; set; }
 		public ReactiveProperty<double> DailyProductAmmo { get; set; }
