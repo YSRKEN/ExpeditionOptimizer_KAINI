@@ -7,6 +7,7 @@ namespace ExpOptII.Models {
 	using DataHash = Dictionary<string, Dictionary<string, string>>;
 	static class Database {
 		public static DataHash ExpList { get; private set; }
+		public static Dictionary<string, int> MapIndex = new Dictionary<string, int> { { "鎮守府海域", 0 }, { "南西諸島海域", 1 }, { "北方海域", 2 }, { "西方海域", 3 }, { "南方海域", 4 } };
 		public static void Initialize() {
 			ExpList = new DataHash();
 			using (var sr = new StreamReader(@"ExpList.csv")) {

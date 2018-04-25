@@ -218,10 +218,8 @@ namespace ExpOptII.Models {
 					}
 					// 実行回数制限
 					foreach (var expInfo in Database.ExpList.Values) {
-						// 遠征番号を取得する
-						int expNo = int.Parse(expInfo["No."]);
 						// 遠征海域番号を算出する
-						int expAreaNo = (expNo - 1) / 8;
+						int expAreaNo = Database.MapIndex[expInfo["海域名"]];
 						// 遠征海域番号によって上限を決定する
 						if (expAreaNo <= OpenedMapType) {
 							problem.SetRowBounds(p, BoundsType.Upper, 0.0, 99999.0);
